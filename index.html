@@ -377,6 +377,12 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .attr-tips{background:#fffbea;border-radius:10px;padding:10px 12px;margin-bottom:10px}
 .attr-tips li{font-size:12px;color:#5a4000;padding:3px 0;list-style:none;line-height:1.4}
 .attr-tips li::before{content:'💡 ';font-size:11px}
+.attr-toggle-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 12px 0;user-select:none}
+.attr-toggle-btn{background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);transition:transform .2s;padding:0;line-height:1}
+.attr-card.attr-open .attr-toggle-btn{transform:rotate(180deg)}
+.attr-collapsible{max-height:0;overflow:hidden;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
+.attr-card.attr-open .attr-collapsible{max-height:1000px}
+.attr-header-body{padding:10px 12px 2px}
 </style>
 </head>
 <body>
@@ -930,14 +936,14 @@ const BUILTIN_ATTRACTIONS = [
    activities:['☕ קפה וינאי קלאסי – Melange, Einspänner, Kapuziner', '🍎 Apfelstrudel (שטרודל תפוחים) – הטוב ביותר בזלצבורג', '🎂 ויטרינת עוגות עצמית – לקחת ולשלם בטמבורה', '🌞 ישיבה בחוץ ב-Schanigarten עם נוף לרחובות', '📸 עיצוב וינאי מקורי מהמאה ה-18'],
    tips:['בקיץ יש תור – כדאי להגיע לפני 11:00 או אחרי 15:00', 'לבקש מקום בחוץ (Schanigarten) – חווייה יפה יותר', 'הגרסה האמיתית של Apfelstrudel – לא לפספס', 'ילדים מקבלים Hot Chocolate נפלא'],
    forKids:'★★★★☆',
-   waze:'https://waze.com/ul?q=Café+Tomaselli+Salzburg&navigate=yes',wikiTitle:'Café_Tomaselli'},
+   waze:'https://waze.com/ul?q=Café+Tomaselli+Salzburg&navigate=yes',menu:'https://www.cafetomaselli.at/speisekarte/',wikiTitle:'Café_Tomaselli'},
   {id:'a10',area:'salzburg',name:'🍺 Augustinerbräu',location:'Augustinergasse 4, Salzburg · מ-1621',
    desc:'מנזר בירה פרנציסקנית עתיק מ-1621 · גן ענק לאלפי בני אדם · אוכל מהשוק הפנימי · מושלם לשתי המשפחות',
    duration:'1.5–2 שעות',
    activities:['🍺 בירת ה-Märzen המנזרית – מוזגים מחביות עץ ענקיות', '🥨 שוק אוכל פנימי – נקניקים, פרצלים, גבינות, מרינדות', '🏡 גן חיצוני ענק – אלפי כיסאות מתחת לעצים', '🎶 לעתים יש מוזיקה חיה אוסטרית', '👨‍👩‍👧‍👦 מושלם למשפחות – ילדים מוזמנים בברכה'],
    tips:['לקחת כוס ברזל/עץ בכניסה, לשטוף בברז המיוחד, למלא מהחבית', 'תשלום במזומן בחלק מהדוכנים – כדאי להביא €20', 'ילדים שותים מיץ/Radler – מרוצים לגמרי', 'המגרשים הטובים בסביבה – ילדים רצים חופשי'],
    forKids:'★★★★☆',
-   waze:'https://waze.com/ul?q=Augustinerbräu+Salzburg&navigate=yes',wikiTitle:'Augustiner_Bräustübl,_Mülln'}
+   waze:'https://waze.com/ul?q=Augustinerbräu+Salzburg&navigate=yes',menu:'https://www.augustinerbier.at/speisen/',wikiTitle:'Augustiner_Bräustübl,_Mülln'}
 ];
 
 const BUILTIN_PACKING = [
@@ -1116,6 +1122,7 @@ function attrCardHTML(a,isCustom){
   const wazeBtn=a.waze?`<a href="${a.waze}" class="btn btn-waze btn-sm" target="_blank">🗺️ Waze</a>`:'';
   const webBtn=a.website?`<a href="${a.website}" class="btn btn-outline btn-sm" target="_blank">🌐 אתר</a>`:'';
   const bookBtn=a.booking?`<a href="${a.booking}" class="btn btn-accent btn-sm" target="_blank">🎫 הזמן</a>`:'';
+  const menuBtn=a.menu?`<a href="${a.menu}" class="btn btn-outline btn-sm" target="_blank" style="background:#fff8f0;border-color:#e07a00;color:#c06000">🍽️ תפריט</a>`:'';
   const editBtn=isCustom?`<div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
     <button class="btn btn-outline btn-sm" onclick="openEditAttrModal('${a.id}')">✏️ ערוך</button>
     <button class="btn btn-danger btn-sm" onclick="deleteAttrById('${a.id}')">🗑️ מחק</button>
@@ -1132,17 +1139,31 @@ function attrCardHTML(a,isCustom){
     <ul class="attr-tips">${a.tips.map(t=>`<li>${t}</li>`).join('')}</ul>`:'';
   return `<div class="attr-card" id="attr-card-${a.id}">
     ${imgEl}
-    <div class="attr-body">
-      <h3>${a.name}</h3>
-      <div class="attr-meta"><span>📍 ${a.location||''}</span>${urgentBadge}</div>
-      <div style="margin-bottom:4px">${kidsBadge}${durationBadge}</div>
-      <p class="attr-desc">${a.desc||''}</p>
-      ${activitiesHTML}
-      ${tipsHTML}
-      <div class="action-row">${wazeBtn}${webBtn}${bookBtn}</div>
-      ${editBtn}
+    <div class="attr-header-body" onclick="toggleAttr('${a.id}')" style="cursor:pointer">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:8px">
+        <div style="flex:1">
+          <h3 style="margin-bottom:4px">${a.name}</h3>
+          <div class="attr-meta"><span>📍 ${a.location||''}</span>${urgentBadge}</div>
+          <div>${kidsBadge}${durationBadge}</div>
+        </div>
+        <button class="attr-toggle-btn" onclick="event.stopPropagation();toggleAttr('${a.id}')">▼</button>
+      </div>
+    </div>
+    <div class="attr-collapsible" id="attr-body-${a.id}">
+      <div class="attr-body" style="padding-top:6px">
+        <p class="attr-desc">${a.desc||''}</p>
+        ${activitiesHTML}
+        ${tipsHTML}
+        <div class="action-row">${wazeBtn}${webBtn}${bookBtn}${menuBtn}</div>
+        ${editBtn}
+      </div>
     </div>
   </div>`;
+}
+function toggleAttr(id){
+  const card=document.getElementById('attr-card-'+id);
+  if(!card)return;
+  card.classList.toggle('attr-open');
 }
 
 async function loadAttrImages(){
