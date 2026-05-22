@@ -377,6 +377,8 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .attr-tips{background:#fffbea;border-radius:10px;padding:10px 12px;margin-bottom:10px}
 .attr-tips li{font-size:12px;color:#5a4000;padding:3px 0;list-style:none;line-height:1.4}
 .attr-tips li::before{content:'💡 ';font-size:11px}
+body.family-aloni .brosh-only{display:none!important}
+body.family-brosh .aloni-only{display:none!important}
 .attr-toggle-row{display:flex;align-items:center;justify-content:space-between;cursor:pointer;padding:10px 12px 0;user-select:none}
 .attr-toggle-btn{background:none;border:none;font-size:18px;cursor:pointer;color:var(--muted);transition:transform .2s;padding:0;line-height:1}
 .attr-card.attr-open .attr-toggle-btn{transform:rotate(180deg)}
@@ -501,13 +503,14 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
       <div class="day-header"><div><div class="day-name">הגעה 🛬</div><div class="day-theme">תל אביב → זלצבורג</div></div><div class="day-badge">11.8<br>ג'</div></div>
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot"></div><div class="tl-body"><h4>שדה תעופה ת"א – טרמינל 1</h4><p>הגעה 3 שעות לפני</p></div></div>
-        <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot"></div><div class="tl-body"><h4>המראה ✈️ 6H 243</h4><p>ישראייר · נטע 2F, עומר 2E, ליה 2D, רומי LAP</p></div></div>
+        <div class="tl-item"><div class="tl-time">12:00</div><div class="tl-dot"></div><div class="tl-body"><h4>המראה ✈️ 6H 243</h4><p><span class="brosh-only">ישראייר · נטע 2F, עומר 2E, ליה 2D, רומי LAP</span><span class="aloni-only">ישראייר · 6H 243</span></p></div></div>
         <div class="tl-item"><div class="tl-time">14:35</div><div class="tl-dot"></div><div class="tl-body"><h4>נחיתה זלצבורג (SZG) 🇦🇹</h4><p>איסוף רכב – AutoEurope Res.629582 · Nissan Qashqai</p></div></div>
         <div class="tl-item"><div class="tl-time">15:30</div><div class="tl-dot"></div><div class="tl-body"><h4>נסיעה דרומה</h4><p>A10 · ~50 דקות</p></div></div>
         <div class="tl-item"><div class="tl-time">16:30</div><div class="tl-dot"></div><div class="tl-body"><h4>צ'ק-אין 🏨 Ferienwelt Kesselgrub</h4><p>Lackengasse 86, Altenmarkt im Pongau</p></div></div>
         <div class="tl-item"><div class="tl-time">19:00</div><div class="tl-dot"></div><div class="tl-body"><h4>ארוחת ערב 🍽️</h4><p>מסעדת המלון – כלול בחבילה</p></div></div>
       </div>
-      <div class="alert alert-warning"><span class="alert-icon">⚠️</span>לאשר כיסאות ילדים עם AutoEurope! Infant seat לרומי + Toddler seat לליה</div>
+      <div class="alert alert-warning brosh-only"><span class="alert-icon">⚠️</span>לאשר כיסאות ילדים עם AutoEurope! Infant seat לרומי + Toddler seat לליה</div>
+      <div class="alert alert-warning aloni-only"><span class="alert-icon">⚠️</span>לאשר כיסא בטיחות לתום ועומרי עם חברת ההשכרה!</div>
       <div class="action-row">
         <a href="https://waze.com/ul?q=Salzburg+Airport&navigate=yes" class="btn btn-waze btn-sm">🗺️ Waze לשדה</a>
         <a href="https://waze.com/ul?q=Ferienwelt+Kesselgrub+Altenmarkt&navigate=yes" class="btn btn-waze btn-sm">🗺️ Waze למלון</a>
@@ -552,8 +555,9 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
         <div class="tl-item"><div class="tl-time">18:30</div><div class="tl-dot"></div><div class="tl-body"><h4>ארוחת ערב במלון 🍽️</h4><p>כלול בחבילה · Kesselgrub</p></div></div>
       </div>
       <div class="action-row">
-        <a href="https://waze.com/ul?q=Burg+Hohenwerfen+Werfen&navigate=yes" class="btn btn-waze btn-sm">🗺️ Waze מבצר</a>
-        <a href="https://waze.com/ul?q=Erlebnis+Therme+Amade+Altenmarkt&navigate=yes" class="btn btn-waze btn-sm">🗺️ Waze טרמה</a>
+        <a href="https://waze.com/ul?q=Burg+Hohenwerfen+Werfen&navigate=yes" class="btn btn-waze btn-sm">🗺️ מבצר</a>
+        <a href="https://waze.com/ul?q=Gasthof+Werfen+Austria&navigate=yes" class="btn btn-waze btn-sm">🗺️ Gasthof Werfen</a>
+        <a href="https://waze.com/ul?q=Erlebnis+Therme+Amade+Altenmarkt&navigate=yes" class="btn btn-waze btn-sm">🗺️ טרמה</a>
         <a href="https://www.getyourguide.com/werfen-l4776/werfen-hohenwerfen-castle-entrance-ticket-t329441/" class="btn btn-accent btn-sm" target="_blank">🎫 הזמן כרטיסים</a>
       </div>
     </div>
@@ -600,19 +604,21 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
     <div class="card-body">
       <div class="day-header"><div><div class="day-name">🦁 הלבורן</div><div class="day-theme">חיות + מזרקות + גנים</div></div><div class="day-badge">16.8<br>א'</div></div>
       <div class="alert alert-info"><span class="alert-icon">💡</span>הצג כרטיס גן חיות בארמון = <strong>Hellbrunn Bonus</strong> (הנחה)!</div>
-      <div class="alert alert-warning"><span class="alert-icon">💧</span>להביא חולצה יבשה לליה – המזרקות מרטיבות מאוד!</div>
+      <div class="alert alert-warning brosh-only"><span class="alert-icon">💧</span>להביא חולצה יבשה לליה – המזרקות מרטיבות מאוד!</div>
+      <div class="alert alert-warning aloni-only"><span class="alert-icon">💧</span>להביא חולצה יבשה לתום – המזרקות מרטיבות מאוד!</div>
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">08:30</div><div class="tl-dot"></div><div class="tl-body"><h4>🥐 ארוחת בוקר במלון</h4><p>כלול בחבילה · Grünauerhof</p></div></div>
         <div class="tl-item"><div class="tl-time">09:00</div><div class="tl-dot"></div><div class="tl-body"><h4>גן חיות הלבורן 🦁</h4><p>Hellbrunner Str. 60, Anif · עגלות בהשאלה חינם · מתחת ל-4 חינם!</p><button class="tl-attr-link" onclick="viewAttraction('a5')">↗ פרטים</button></div></div>
         <div class="tl-item"><div class="tl-time">11:30</div><div class="tl-dot"></div><div class="tl-body"><h4>ארמון הלבורן ⛲</h4><p>Fürstenweg 37 · סיור מזרקות 50 דק' · ~€16.50 מבוגר</p><button class="tl-attr-link" onclick="viewAttraction('a6')">↗ פרטים</button></div></div>
         <div class="tl-item"><div class="tl-time">13:30</div><div class="tl-dot"></div><div class="tl-body"><h4>🥗 צהריים ב-Anif</h4><p>מסעדה מקומית · ליד הארמון</p></div></div>
-        <div class="tl-item"><div class="tl-time">15:00</div><div class="tl-dot"></div><div class="tl-body"><h4>מנוחה במלון 😴</h4><p>שינה לרומי</p></div></div>
+        <div class="tl-item"><div class="tl-time">15:00</div><div class="tl-dot"></div><div class="tl-body"><h4>מנוחה במלון 😴</h4><p><span class="brosh-only">שינה לרומי</span><span class="aloni-only">שינה לעומרי</span></p></div></div>
         <div class="tl-item"><div class="tl-time">17:00</div><div class="tl-dot"></div><div class="tl-body"><h4>גני מירבל 🌸</h4><p>חינם · מגרש ילדים ענק + מבצר עץ</p><button class="tl-attr-link" onclick="viewAttraction('a8')">↗ פרטים</button></div></div>
         <div class="tl-item"><div class="tl-time">19:30</div><div class="tl-dot"></div><div class="tl-body"><h4>ארוחת ערב במלון 🍽️</h4><p>כלול בחבילה · Grünauerhof</p></div></div>
       </div>
       <div class="action-row">
         <a href="https://waze.com/ul?q=Salzburg+Zoo+Hellbrunn&navigate=yes" class="btn btn-waze btn-sm">🗺️ גן חיות</a>
         <a href="https://waze.com/ul?q=Schloss+Hellbrunn+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ ארמון</a>
+        <a href="https://waze.com/ul?q=restaurant+Anif+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ מסעדה Anif</a>
         <a href="https://waze.com/ul?q=Mirabell+Gardens+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ מירבל</a>
       </div>
     </div>
@@ -632,6 +638,8 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
       </div>
       <div class="action-row">
         <a href="https://waze.com/ul?q=Festung+Hohensalzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ מבצר</a>
+        <a href="https://waze.com/ul?q=Café+Tomaselli+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ Tomaselli</a>
+        <a href="https://waze.com/ul?q=Mirabell+Gardens+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ מירבל</a>
         <a href="https://waze.com/ul?q=Augustinerbräu+Salzburg&navigate=yes" class="btn btn-waze btn-sm">🗺️ Augustinerbräu</a>
       </div>
     </div>
@@ -645,7 +653,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
       <div class="timeline">
         <div class="tl-item"><div class="tl-time">08:00</div><div class="tl-dot"></div><div class="tl-body"><h4>בופה + אריזות 🧳</h4><p>המלון 10 דקות משדה התעופה</p></div></div>
         <div class="tl-item"><div class="tl-time">09:10</div><div class="tl-dot"></div><div class="tl-body"><h4>החזרת הרכב + שדה תעופה</h4><p>Res.629582 · AutoEurope · SZG</p></div></div>
-        <div class="tl-item"><div class="tl-time">12:10</div><div class="tl-dot"></div><div class="tl-body"><h4>המראה ✈️ 6H 248</h4><p>ישראייר · נטע 2F, עומר 2E, ליה 2D</p></div></div>
+        <div class="tl-item"><div class="tl-time">12:10</div><div class="tl-dot"></div><div class="tl-body"><h4>המראה ✈️ 6H 248</h4><p><span class="brosh-only">ישראייר · נטע 2F, עומר 2E, ליה 2D</span><span class="aloni-only">ישראייר · 6H 248</span></p></div></div>
         <div class="tl-item"><div class="tl-time">16:45</div><div class="tl-dot"></div><div class="tl-body"><h4>נחיתה תל אביב 🏠</h4><p>ברוכים השבים!</p></div></div>
       </div>
       <div class="action-row"><a href="https://waze.com/ul?q=Salzburg+Airport&navigate=yes" class="btn btn-waze btn-sm">🗺️ Waze לשדה</a></div>
@@ -733,8 +741,9 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
   <div class="ck-item" data-id="ck_hellbrunn" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">ארמון הלבורן – כרטיסים 16.8</div><div class="ck-sub">~€16.50 מבוגר · ~€6.50 ילד</div><div class="action-row" style="margin-top:6px"><a href="https://www.hellbrunn.at/en/" class="btn btn-accent btn-sm" target="_blank" onclick="event.stopPropagation()">🎫 להזמין</a></div></div><span class="ck-tag tag-red">חובה!</span></div>
   <div class="ck-item" data-id="ck_zoo" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">גן חיות הלבורן – כרטיסים 16.8</div><div class="ck-sub">~€12.50 מבוגר · מתחת ל-4 חינם!</div></div><span class="ck-tag tag-red">חובה!</span></div>
   <p class="sec-title">⚠️ משימות דחופות</p>
-  <div class="ck-item" data-id="ck_carseat" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">אשר כיסאות ילדים – AutoEurope</div><div class="ck-sub">Infant לרומי + Toddler לליה · טל: 03-5244244</div></div><span class="ck-tag tag-red">דחוף!</span></div>
-  <div class="ck-item" data-id="ck_infant" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">לברר כלל lap infant לרומי – ישראייר</div></div><span class="ck-tag tag-red">דחוף!</span></div>
+  <div class="ck-item brosh-only" data-id="ck_carseat" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">אשר כיסאות ילדים – AutoEurope</div><div class="ck-sub">Infant לרומי + Toddler לליה · טל: 03-5244244</div></div><span class="ck-tag tag-red">דחוף!</span></div>
+  <div class="ck-item brosh-only" data-id="ck_infant" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">לברר כלל lap infant לרומי – ישראייר</div></div><span class="ck-tag tag-red">דחוף!</span></div>
+  <div class="ck-item aloni-only" data-id="ck_carseat_aloni" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">אשר כיסאות ילדים לתום ועומרי – חברת ההשכרה</div></div><span class="ck-tag tag-red">דחוף!</span></div>
   <div class="ck-item" data-id="ck_aloni_hotel" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">לוודא הזמנת מלון – משפחת אלוני</div></div><span class="ck-tag tag-red">דחוף!</span></div>
   <div class="ck-item" data-id="ck_aloni_car" onclick="toggleCheck(this)"><div class="ck-circle"></div><div style="flex:1"><div class="ck-text">רכב – משפחת אלוני (שדה זלצבורג)</div><div class="action-row" style="margin-top:6px"><a href="https://www.salzburg-airport.com/en/arriving-and-departing/rental-cars" class="btn btn-outline btn-sm" target="_blank" onclick="event.stopPropagation()">🚗 השכרות בשדה</a></div></div><span class="ck-tag tag-red">דחוף!</span></div>
   <p class="sec-title">🟡 לשקול</p>
@@ -782,8 +791,10 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 <!-- ── טיפים ── -->
 <div class="tab-panel" id="panel-tips">
   <p class="sec-title">👶 ילדים ותינוקות</p>
-  <div class="tip-card"><div class="tip-icon">🍼</div><div class="tip-body"><h4>רומי (13 חודשים)</h4><p>Kesselgrub מציע בופה HIPP לתינוקות כלול בחבילה. להביא מזון לטיסה. לסנסק בשמש חזקה.</p></div></div>
-  <div class="tip-card"><div class="tip-icon">🧒</div><div class="tip-body"><h4>ליה (4 שנים)</h4><p>להביא חולצה יבשה לסיור ארמון הלבורן – המזרקות מרטיבות מאוד! קלוב ילדים ב-Kesselgrub 70ש'/שבוע.</p></div></div>
+  <div class="tip-card brosh-only"><div class="tip-icon">🍼</div><div class="tip-body"><h4>רומי (13 חודשים)</h4><p>Kesselgrub מציע בופה HIPP לתינוקות כלול בחבילה. להביא מזון לטיסה. לסנסק בשמש חזקה.</p></div></div>
+  <div class="tip-card brosh-only"><div class="tip-icon">🧒</div><div class="tip-body"><h4>ליה (4 שנים)</h4><p>להביא חולצה יבשה לסיור ארמון הלבורן – המזרקות מרטיבות מאוד! קלוב ילדים ב-Kesselgrub 70ש'/שבוע.</p></div></div>
+  <div class="tip-card aloni-only"><div class="tip-icon">👶</div><div class="tip-body"><h4>עומרי (2 שנים)</h4><p>Kesselgrub מציע מגרש משחקים ובריכה לפעוטות. להביא חטיפים לטיסה. לסנסק בשמש חזקה.</p></div></div>
+  <div class="tip-card aloni-only"><div class="tip-icon">👦</div><div class="tip-body"><h4>תום (4 שנים)</h4><p>להביא חולצה יבשה לסיור ארמון הלבורן – המזרקות מרטיבות מאוד! קלוב ילדים ב-Kesselgrub 70ש'/שבוע.</p></div></div>
   <div class="tip-card"><div class="tip-icon">🛺</div><div class="tip-body"><h4>עגלות</h4><p>Geisterberg: עגלה עולה בגונדולה ✓. גן חיות הלבורן: עגלות בהשאלה חינם. גני מירבל: נגיש לחלוטין.</p></div></div>
   <p class="sec-title">🌤️ מזג אוויר</p>
   <div class="tip-card"><div class="tip-icon">🌡️</div><div class="tip-body"><h4>ממוצעים אוגוסט</h4><p>עמק: מקס' 25°C, מינ' 15°C · ~12 ימי גשם בחודש. הרים (~1,500מ'): 15–18°C.</p></div></div>
@@ -1041,10 +1052,16 @@ function checkPasscode(force){
     document.getElementById('lock-error').style.display='block';
   }
 }
+function applyFamilyClass(name){
+  document.body.classList.remove('family-brosh','family-aloni');
+  if(name==='ברוש')document.body.classList.add('family-brosh');
+  else if(name==='אלוני')document.body.classList.add('family-aloni');
+}
 function selectFamily(name){
   if(!name.trim())return;
   currentUser={name:name.trim()};
   localStorage.setItem('austria26_user',JSON.stringify(currentUser));
+  applyFamilyClass(name.trim());
   document.getElementById('lock-screen').style.display='none';
   document.getElementById('user-name-display').textContent=name;
   initApp();
@@ -1506,6 +1523,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   if(saved){
     try{
       currentUser=JSON.parse(saved);
+      applyFamilyClass(currentUser.name);
       document.getElementById('lock-screen').style.display='none';
       document.getElementById('user-name-display').textContent=currentUser.name;
       initApp();
