@@ -336,21 +336,23 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 
 /* ── COUNTDOWN BAR ── */
 .countdown-bar{
-  background:linear-gradient(90deg,rgba(0,0,0,.18),rgba(0,0,0,.08));
-  padding:5px 16px;
-  display:flex;align-items:center;justify-content:center;gap:10px;
-  border-bottom:1px solid rgba(255,255,255,.12);
+  background:#111;
+  padding:7px 16px;
+  display:flex;align-items:center;justify-content:center;gap:12px;
+  border-bottom:2px solid rgba(0,0,0,.12);
+  flex-shrink:0;
 }
-.cdb-label{color:rgba(255,255,255,.75);font-size:11px;font-weight:700;white-space:nowrap}
+.cdb-label{color:rgba(255,255,255,.85);font-size:12px;font-weight:800;white-space:nowrap}
 .cdb-units{display:flex;align-items:flex-start;gap:2px}
-.cdb-unit{display:flex;flex-direction:column;align-items:center;min-width:32px}
-.cdb-n{font-size:19px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.5px}
-.cdb-u{font-size:8px;font-weight:600;color:rgba(255,255,255,.65);margin-top:1px}
-.cdb-sep{font-size:17px;font-weight:900;color:rgba(255,255,255,.45);margin-top:1px}
+.cdb-unit{display:flex;flex-direction:column;align-items:center;min-width:34px}
+.cdb-n{font-size:22px;font-weight:900;color:#fff;line-height:1;font-variant-numeric:tabular-nums;letter-spacing:-0.5px;text-shadow:0 1px 4px rgba(0,0,0,.3)}
+.cdb-u{font-size:9px;font-weight:700;color:rgba(255,255,255,.8);margin-top:2px;text-transform:uppercase}
+.cdb-sep{font-size:18px;font-weight:900;color:rgba(255,255,255,.6);margin-top:1px;padding:0 1px}
 @media (min-width:1024px){
-  .countdown-bar{padding:4px 20px;gap:8px;border-bottom:1px solid rgba(0,0,0,.06);}
-  .cdb-n{font-size:16px;}
-  .cdb-u{font-size:7px;}
+  .countdown-bar{padding:6px 20px;gap:10px;}
+  .cdb-n{font-size:18px;}
+  .cdb-u{font-size:8px;}
+  .cdb-label{font-size:11px;}
 }
 
 /* ── LOCK SCREEN COUNTDOWN ── */
@@ -1308,32 +1310,21 @@ async function fetchWeather(){
   const today=new Date();
   const days=Math.ceil((tripStart-today)/(1000*60*60*24));
   if(days>14){
-    const weeks=Math.floor(days/7);
-    const daysRem=days%7;
     document.getElementById('weather-container').innerHTML=`
       <div class="weather-strip">
-        <div class="weather-countdown">
-          <div class="cdw-main">
-            <span class="cdw-num">${weeks}</span>
-            <span class="cdw-unit">שב'</span>
-          </div>
-          ${daysRem?`<div class="cdw-sub">+ ${daysRem} ימים</div>`:''}
-          <div class="cdw-divider"></div>
-          <div class="cdw-label">עוד לטיול! 🇦🇹</div>
-          <div class="cdw-note">תחזית חיה 2 שב' לפני הטיסה</div>
-        </div>
         <div>
           <div class="cdw-avg-title">ממוצע אוגוסט · זלצבורג</div>
-          <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
             <span style="background:var(--accent-light);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600">☀️ מקס' ~25°C</span>
             <span style="background:#e8f4fd;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600">🌙 מינ' ~15°C</span>
             <span style="background:#f0f0ff;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600">🌧️ ~12 ימי גשם</span>
             <span style="background:#f0fff4;border-radius:8px;padding:6px 10px;font-size:13px;font-weight:600">⛰️ הרים: 15–18°C</span>
           </div>
+          <p style="font-size:11px;color:var(--muted);margin-top:10px">תחזית חיה תופיע 2 שב' לפני הטיסה</p>
         </div>
       </div>`;
     document.getElementById('header-temp').textContent='☀️';
-    document.getElementById('header-wlabel').textContent=weeks+'שב\'';
+    document.getElementById('header-wlabel').textContent='11.8';
     return;
   }
   try{
