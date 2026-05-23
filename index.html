@@ -7,11 +7,13 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>🇦🇹 אוסטריה אוגוסט 2026</title>
 <link href="https://fonts.googleapis.com/css2?family=Assistant:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
 <style>
 :root {
   --primary:#1a6b3c;--primary-light:#2d9e5f;--primary-dark:#0f4526;
   --accent:#8DC63F;--accent-light:#eef7d6;
-  --cta:#141414;
+  --lime-tint:#E8F5D0;--lime-dark:#3B6D11;
+  --cta:#141414;--gray-ui:#F0F0EE;--gray-text:#9A9A9A;
   --danger:#dc3545;--warning:#fd7e14;
   --bg:#F7F8F5;--card:#fff;--text:#141414;--muted:#6b7d6b;--border:#e2e8e2;
   --shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 6px 24px rgba(0,0,0,.14);
@@ -119,7 +121,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-sm{padding:7px 12px;font-size:12px;min-height:36px}
 .btn-block{width:100%;justify-content:center}
-.btn-waze{background:#07c9eb;color:white;position:relative;overflow:hidden}
+.btn-waze{background:var(--lime-tint);color:var(--lime-dark);position:relative;overflow:hidden}
 .btn-waze:active::after,.tl-attr-link:active::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.35);border-radius:inherit;animation:ripple .3s ease-out;pointer-events:none}
 .tl-attr-link{position:relative;overflow:hidden}
 .weather-skeleton{height:70px;border-radius:12px;background:linear-gradient(90deg,#eef2ee 25%,#e0e8e0 50%,#eef2ee 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin:4px 0}
@@ -401,6 +403,14 @@ body.family-brosh .aloni-only{display:none!important}
    TRAVELO REDESIGN – MOBILE HERO + BOTTOM NAV
    ══════════════════════════════════════════ */
 
+/* ── Feather nav icons (desktop + mobile) ── */
+.tab-btn{color:var(--gray-text)}
+.tab-btn.active{color:var(--primary)}
+.tab-btn svg.feather{width:22px;height:22px;stroke:currentColor;stroke-width:1.5;fill:none;flex-shrink:0;transition:stroke-width .15s}
+.tab-btn.active svg.feather{stroke-width:2.5}
+/* Waze inline link override: always lime-tint, not cyan */
+.tl-attr-link[href*="waze"]{background:var(--lime-tint)!important;color:var(--lime-dark)!important}
+
 /* Tags pill-shaped */
 .ck-tag,.pack-urgent,.tag,.badge{border-radius:999px}
 .attr-kids-rating{border-radius:999px}
@@ -497,18 +507,20 @@ body.family-brosh .aloni-only{display:none!important}
   .tab-btn .tl{font-size:10px;font-weight:700;line-height:1}
   /* inactive: icon only */
   .tab-btn:not(.active) .tl{display:none}
-  /* active: lime pill with label */
+  /* active: lime pill with label side-by-side */
   .tab-btn.active{
     background:var(--accent);
     border-bottom-color:transparent;
-    color:#141414;
-    border-radius:16px;
-    padding:5px 10px;
-    max-width:76px;
+    color:white;
+    border-radius:999px;
+    padding:8px 14px;
+    flex-direction:row;
+    gap:5px;
+    max-width:100px;
     flex:0 0 auto;
   }
-  .tab-btn.active .ti{font-size:18px}
-  .tab-btn.active .tl{display:block;color:#141414;font-weight:800;font-size:11px}
+  .tab-btn.active svg.feather{stroke-width:2.5;width:20px;height:20px}
+  .tab-btn.active .tl{display:block;color:white;font-weight:700;font-size:12px;white-space:nowrap}
 
   /* ── Content: pad for bottom nav ── */
   .tab-panel {
@@ -602,14 +614,14 @@ body.family-brosh .aloni-only{display:none!important}
   </div>
 </div>
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><span class="ti">📅</span><span class="tl">לו"ז</span></button>
-  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><span class="ti">🏨</span><span class="tl">מלונות</span></button>
-  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><span class="ti">🎡</span><span class="tl">אטרקציות</span></button>
-  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><span class="ti">🎫</span><span class="tl">הזמנות</span></button>
-  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><span class="ti">✈️</span><span class="tl">טיסות</span></button>
-  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><span class="ti">🎒</span><span class="tl">ציוד</span></button>
-  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><span class="ti">🍽️</span><span class="tl">מסעדות</span></button>
-  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><span class="ti">💡</span><span class="tl">טיפים</span></button>
+  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><i data-feather="calendar"></i><span class="tl">לו"ז</span></button>
+  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><i data-feather="home"></i><span class="tl">מלונות</span></button>
+  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><i data-feather="map-pin"></i><span class="tl">אטרקציות</span></button>
+  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><i data-feather="book-open"></i><span class="tl">הזמנות</span></button>
+  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><i data-feather="send"></i><span class="tl">טיסות</span></button>
+  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><i data-feather="package"></i><span class="tl">ציוד</span></button>
+  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><i data-feather="coffee"></i><span class="tl">מסעדות</span></button>
+  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><i data-feather="info"></i><span class="tl">טיפים</span></button>
 </nav>
 </div><!-- end sticky-shell -->
 
@@ -1747,6 +1759,7 @@ function initApp(){
   fetchWeather();
   initItinIds();
   applyItinMods();
+  if(window.feather)feather.replace();
 }
 
 document.addEventListener('DOMContentLoaded',()=>{
