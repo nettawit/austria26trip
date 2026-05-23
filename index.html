@@ -10,11 +10,12 @@
 <style>
 :root {
   --primary:#1a6b3c;--primary-light:#2d9e5f;--primary-dark:#0f4526;
-  --accent:#e8a020;--accent-light:#fef3d8;
+  --accent:#8DC63F;--accent-light:#eef7d6;
+  --cta:#141414;
   --danger:#dc3545;--warning:#fd7e14;
-  --bg:#f5f7f5;--card:#fff;--text:#1a2e1a;--muted:#6b7d6b;--border:#d8e8d8;
-  --shadow:0 2px 12px rgba(26,107,60,.10);--shadow-lg:0 6px 24px rgba(26,107,60,.15);
-  --radius:16px;--radius-sm:10px;
+  --bg:#F7F8F5;--card:#fff;--text:#141414;--muted:#6b7d6b;--border:#e2e8e2;
+  --shadow:0 2px 12px rgba(0,0,0,.08);--shadow-lg:0 6px 24px rgba(0,0,0,.14);
+  --radius:20px;--radius-sm:12px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:'Assistant',sans-serif;background:var(--bg);color:var(--text);font-size:15px;-webkit-font-smoothing:antialiased}
@@ -50,7 +51,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .family-badges{display:flex;gap:6px;flex-wrap:wrap}
 .badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:600}
 .badge-brosh{background:rgba(255,255,255,.25)}
-.badge-aloni{background:rgba(232,160,32,.4)}
+.badge-aloni{background:rgba(141,198,63,.35)}
 
 /* ── TAB NAV ── */
 .tab-nav{display:flex;background:white;border-bottom:2px solid var(--border);overflow-x:auto;scrollbar-width:none;-webkit-overflow-scrolling:touch}
@@ -93,7 +94,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .tl-item:last-child{margin-bottom:0}
 .tl-time{min-width:48px;max-width:48px;font-size:11px;font-weight:700;color:var(--primary);text-align:left;padding-top:3px;line-height:1.3}
 .tl-dot{width:12px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
-.tl-dot::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--primary-light);flex-shrink:0;margin-top:4px}
+.tl-dot::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px}
 .tl-dot::after{content:'';width:2px;flex:1;background:var(--border);margin-top:4px}
 .tl-item:last-child .tl-dot::after{display:none}
 .tl-body{flex:1;min-width:0;padding-top:1px}
@@ -109,7 +110,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .alert-icon{font-size:16px;flex-shrink:0}
 
 /* ── BUTTONS ── */
-.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:10px;font-family:'Assistant',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all .15s;min-height:44px;user-select:none;white-space:nowrap}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;font-family:'Assistant',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all .15s;min-height:44px;user-select:none;white-space:nowrap}
 .btn:active{opacity:.8;transform:scale(.97)}
 .btn-primary{background:var(--primary);color:white}
 .btn-accent{background:var(--accent);color:white}
@@ -378,7 +379,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .family-kids{font-size:11px;font-weight:400;opacity:.7;margin-top:3px}
 
 /* ── ATTRACTION DETAILS ── */
-.attr-duration{display:inline-flex;align-items:center;gap:4px;background:var(--accent-light);border-radius:8px;padding:3px 10px;font-size:12px;font-weight:700;color:#7a5500;margin-bottom:10px}
+.attr-duration{display:inline-flex;align-items:center;gap:4px;background:var(--accent-light);border-radius:999px;padding:3px 10px;font-size:12px;font-weight:700;color:#3a5e00;margin-bottom:10px}
 .attr-kids-rating{display:inline-flex;align-items:center;gap:4px;background:#f0fff4;border-radius:8px;padding:3px 10px;font-size:12px;font-weight:700;color:var(--primary);margin-right:6px;margin-bottom:10px}
 .attr-section-title{font-size:11px;font-weight:800;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:10px 0 6px}
 .attr-activities{list-style:none;padding:0;margin:0 0 10px}
@@ -395,6 +396,129 @@ body.family-brosh .aloni-only{display:none!important}
 .attr-collapsible{max-height:0;overflow:hidden;transition:max-height .28s cubic-bezier(.4,0,.2,1)}
 .attr-card.attr-open .attr-collapsible{max-height:1000px}
 .attr-header-body{padding:10px 12px 2px}
+
+/* ══════════════════════════════════════════
+   TRAVELO REDESIGN – MOBILE HERO + BOTTOM NAV
+   ══════════════════════════════════════════ */
+
+/* Tags pill-shaped */
+.ck-tag,.pack-urgent,.tag,.badge{border-radius:999px}
+.attr-kids-rating{border-radius:999px}
+
+/* Card radius upgrade */
+.card,.attr-card,.weather-strip,.tip-card,.ck-item,.pack-item{border-radius:20px}
+.lock-box{border-radius:28px}
+
+/* CTA button color */
+.btn-primary{background:var(--cta);color:#fff}
+.btn-primary:hover{background:#2a2a2a}
+
+/* Today weather card accent */
+.wd-card.today{background:var(--accent-light);border-color:var(--accent)}
+
+@media (max-width:767px) {
+  /* ── Hero shell: Alpine background image ── */
+  .sticky-shell {
+    background-color:var(--primary-dark);
+    background-image:
+      linear-gradient(to bottom, rgba(0,0,0,0.06) 0%, rgba(0,0,0,0.62) 100%),
+      url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=75&auto=format&fit=crop');
+    background-size:cover;
+    background-position:center top;
+  }
+
+  /* ── App header: transparent over hero bg ── */
+  .app-header {
+    background:transparent;
+    box-shadow:none;
+    min-height:160px;
+    display:flex;
+    flex-direction:column;
+    justify-content:flex-end;
+    padding-bottom:12px;
+  }
+  .app-header .header-title h1{
+    font-size:22px;
+    text-shadow:0 1px 6px rgba(0,0,0,.45);
+  }
+  .app-header .header-title p{
+    text-shadow:0 1px 4px rgba(0,0,0,.4);
+  }
+  .user-chip{background:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+  .weather-chip{background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+
+  /* ── Countdown: frosted glass pill ── */
+  .countdown-bar {
+    background:rgba(0,0,0,0.32);
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.18);
+    border-bottom:1px solid rgba(255,255,255,0.12);
+    border-radius:999px;
+    margin:4px 14px 12px;
+    padding:7px 18px;
+  }
+  .cdb-label{color:rgba(255,255,255,.9)}
+  .cdb-n{text-shadow:none}
+
+  /* ── Bottom tab bar ── */
+  .tab-nav {
+    position:fixed;
+    bottom:0;left:0;right:0;
+    height:72px;
+    flex-direction:row;
+    justify-content:space-around;
+    align-items:center;
+    border-top:1px solid var(--border);
+    border-bottom:none;
+    background:rgba(255,255,255,0.96);
+    backdrop-filter:blur(12px);
+    -webkit-backdrop-filter:blur(12px);
+    z-index:150;
+    padding:6px 4px;
+    padding-bottom:max(6px,env(safe-area-inset-bottom));
+    overflow-x:visible;
+    gap:0;
+  }
+  .tab-btn {
+    flex:1;
+    flex-direction:column;
+    padding:5px 3px;
+    border-bottom:none;
+    min-height:0;
+    min-width:0;
+    max-width:60px;
+    gap:2px;
+    border-radius:14px;
+    font-size:10px;
+    transition:background .15s;
+  }
+  .tab-btn .ti{font-size:20px}
+  .tab-btn .tl{font-size:10px;font-weight:700;line-height:1}
+  /* inactive: icon only */
+  .tab-btn:not(.active) .tl{display:none}
+  /* active: lime pill with label */
+  .tab-btn.active{
+    background:var(--accent);
+    border-bottom-color:transparent;
+    color:#141414;
+    border-radius:16px;
+    padding:5px 10px;
+    max-width:76px;
+    flex:0 0 auto;
+  }
+  .tab-btn.active .ti{font-size:18px}
+  .tab-btn.active .tl{display:block;color:#141414;font-weight:800;font-size:11px}
+
+  /* ── Content: pad for bottom nav ── */
+  .tab-panel {
+    padding-bottom:max(90px,calc(72px + env(safe-area-inset-bottom,0px)));
+  }
+
+  /* ── Tap targets ── */
+  .btn,.att-btn,.bc-btn{min-height:44px;min-width:44px}
+  .btn-sm{min-height:40px}
+}
 </style>
 </head>
 <body>
@@ -478,14 +602,14 @@ body.family-brosh .aloni-only{display:none!important}
   </div>
 </div>
 <nav class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><span class="ti">📅</span>לו"ז</button>
-  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><span class="ti">🏨</span>מלונות</button>
-  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><span class="ti">🎡</span>אטרקציות</button>
-  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><span class="ti">🎫</span>הזמנות</button>
-  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><span class="ti">✈️</span>טיסות</button>
-  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><span class="ti">🎒</span>ציוד</button>
-  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><span class="ti">🍽️</span>מסעדות</button>
-  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><span class="ti">💡</span>טיפים</button>
+  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><span class="ti">📅</span><span class="tl">לו"ז</span></button>
+  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><span class="ti">🏨</span><span class="tl">מלונות</span></button>
+  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><span class="ti">🎡</span><span class="tl">אטרקציות</span></button>
+  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><span class="ti">🎫</span><span class="tl">הזמנות</span></button>
+  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><span class="ti">✈️</span><span class="tl">טיסות</span></button>
+  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><span class="ti">🎒</span><span class="tl">ציוד</span></button>
+  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><span class="ti">🍽️</span><span class="tl">מסעדות</span></button>
+  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><span class="ti">💡</span><span class="tl">טיפים</span></button>
 </nav>
 </div><!-- end sticky-shell -->
 
