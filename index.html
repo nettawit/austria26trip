@@ -179,17 +179,22 @@ body{display:flex;flex-direction:column;height:100%;overflow:hidden}
 .cdw-note{font-size:11px;color:var(--muted);margin-top:5px;line-height:1.4}
 .cdw-avg-title{font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px}
 /* itinerary edit mode */
+/* ── ITIN EDIT BAR ── */
 .itin-edit-bar{display:flex;align-items:center;justify-content:space-between;padding:8px 0 14px;gap:8px}
 .itin-edit-bar .edit-label{font-size:12px;color:var(--muted)}
+.itin-editing .itin-edit-bar{background:#E8F5D0;border-radius:12px;padding:10px 16px;margin-bottom:12px}
+.itin-editing .itin-edit-bar .edit-label{color:#3B6D11;font-size:13px}
+#itin-edit-btn{display:inline-flex;align-items:center;gap:6px;background:#141414;color:white;border:none;border-radius:999px;padding:8px 18px;font-size:14px;font-weight:600;font-family:'Assistant',sans-serif;cursor:pointer;height:40px;min-height:40px}
+/* ── TIMELINE EDIT CONTROLS ── */
 .tl-item{position:relative}
-.tl-item .tl-edit-ctrl{display:none;gap:4px;margin-bottom:4px;align-items:center}
-.itin-editing .tl-item .tl-edit-ctrl{display:flex}
-.tl-del-btn{background:#fee2e2;border:none;border-radius:6px;padding:3px 8px;font-size:12px;cursor:pointer;color:#dc2626;font-weight:700;white-space:nowrap}
-.tl-del-btn:hover{background:#fca5a5}
-.tl-move-select{font-size:11px;border:1px solid var(--border);border-radius:6px;padding:3px 6px;background:white;color:var(--text);cursor:pointer;max-width:130px}
+.tl-item .tl-edit-ctrl{display:none}
+.itin-editing .tl-item .tl-edit-ctrl{display:flex;align-items:center;gap:8px;margin-top:10px;padding-top:10px;border-top:1px solid #EBEBEA}
+.tl-del-btn{height:36px;padding:0 16px;border:1.5px solid #FFCDD2;border-radius:999px;background:white;color:#C62828;font-size:13px;font-weight:600;font-family:'Assistant',sans-serif;cursor:pointer;white-space:nowrap;flex-shrink:0}
+.tl-del-btn:active{background:#FFEBEE}
+.tl-move-select{flex:1;height:36px;border:1.5px solid #DDDDD8;border-radius:999px;padding:0 12px;font-size:13px;font-family:'Assistant',sans-serif;color:#5A5A5A;background:white;cursor:pointer;-webkit-appearance:none;direction:rtl}
 .tl-item.tl-deleted{display:none}
-.itin-editing .tl-item{padding:6px 8px;border-radius:8px;background:rgba(0,0,0,.02);margin-bottom:10px}
-.itin-editing .tl-item:hover{background:rgba(0,0,0,.04)}
+.itin-editing .tl-item{padding:10px 12px;border-radius:12px;background:#FAFAF8;margin-bottom:4px;border:1px solid #EBEBEA}
+.itin-editing .tl-item:hover{background:#f5f5f3}
 
 /* ── SECTION TITLE ── */
 .sec-title{font-size:13px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin:20px 0 10px;padding-bottom:6px;border-bottom:2px solid var(--border)}
@@ -1728,6 +1733,7 @@ function saveItinMods(m){localStorage.setItem('austria26_itin',JSON.stringify(m)
 function initItinIds(){
   document.querySelectorAll('.card[id^="d"]').forEach(card=>{
     card.querySelectorAll('.tl-item').forEach((item,i)=>{
+      if(item.querySelector('.tl-edit-ctrl'))return; // already initialized
       const iid=card.id+'-'+i;
       item.dataset.iid=iid;
       // inject control bar
@@ -1735,9 +1741,12 @@ function initItinIds(){
       const opts=Object.entries(DAY_LABELS).filter(([k])=>k!==card.id).map(([k,v])=>`<option value="${k}">${v}</option>`).join('');
       const ctrl=document.createElement('div');
       ctrl.className='tl-edit-ctrl';
-      ctrl.innerHTML=`<button class="tl-del-btn" onclick="deleteItinItem('${iid}')">× מחק</button>`+
-        `<select class="tl-move-select" onchange="moveItinItem('${iid}',this.value);this.value=''"><option value="">↕ העבר ל...</option>${opts}</select>`;
-      item.insertBefore(ctrl,item.firstChild);
+      ctrl.innerHTML=
+        `<select class="tl-move-select" onchange="moveItinItem('${iid}',this.value);this.value=''"><option value="" disabled selected>העבר ליום...</option>${opts}</select>`+
+        `<button class="tl-del-btn" onclick="deleteItinItem('${iid}')">מחק</button>`;
+      const body=item.querySelector('.tl-body');
+      if(body)body.appendChild(ctrl);
+      else item.appendChild(ctrl);
     });
   });
 }
