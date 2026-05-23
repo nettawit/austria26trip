@@ -433,7 +433,7 @@ body.family-brosh .aloni-only{display:none!important}
     justify-content:space-between;
     background-color:var(--primary-dark);
     background-image:
-      linear-gradient(to bottom, rgba(0,0,0,0.08) 0%, rgba(0,0,0,0.65) 100%),
+      linear-gradient(to bottom, rgba(0,0,0,0.05) 0%, rgba(0,0,0,0.20) 40%, rgba(0,0,0,0.72) 100%),
       url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&q=75&auto=format&fit=crop');
     background-size:cover;
     background-position:center 30%;
@@ -451,37 +451,64 @@ body.family-brosh .aloni-only{display:none!important}
     padding:max(36px,env(safe-area-inset-top)) 16px 10px;
   }
 
-  /* ── Hero top row: family chips (right/start) + weather+user (left/end) ── */
-  .hero-topbar {
+  /* ── Hero top bar: family chips + weather pill ── */
+  .hero-top-bar {
     display:flex;
     justify-content:space-between;
-    align-items:flex-start;
+    align-items:center;
     gap:8px;
+    position:relative;
+    z-index:1;
   }
-  .header-actions{display:flex;gap:8px;align-items:center}
+  .hero-chips { display:flex; gap:6px; }
+  .hero-chip {
+    background:rgba(255,255,255,0.20);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.25);
+    color:white;
+    border-radius:999px;
+    padding:6px 14px;
+    font-size:13px;
+    font-weight:600;
+    cursor:pointer;
+    transition:background 0.15s;
+  }
+  .hero-weather-pill {
+    background:rgba(255,255,255,0.18);
+    backdrop-filter:blur(8px);
+    -webkit-backdrop-filter:blur(8px);
+    border:1px solid rgba(255,255,255,0.20);
+    color:rgba(255,255,255,0.92);
+    border-radius:999px;
+    padding:5px 12px;
+    font-size:12px;
+    font-weight:500;
+    white-space:nowrap;
+  }
+  /* Active family chip: lime */
+  body.family-brosh #hero-chip-brosh{background:var(--accent)!important;border-color:var(--accent)!important}
+  body.family-aloni #hero-chip-aloni{background:var(--accent)!important;border-color:var(--accent)!important}
 
   /* ── Hero title at bottom ── */
-  .header-title h1{
-    font-size:26px;
+  .hero-title {
+    font-size:32px;
     font-weight:800;
     color:white;
     text-shadow:0 1px 6px rgba(0,0,0,.45);
     line-height:1.2;
+    position:relative;
+    z-index:1;
   }
-  .header-title p{
-    font-size:13px;
-    color:rgba(255,255,255,.85);
+  .hero-dates {
+    font-size:14px;
+    font-weight:400;
+    color:rgba(255,255,255,0.70);
     text-shadow:0 1px 3px rgba(0,0,0,.4);
     margin-top:3px;
+    position:relative;
+    z-index:1;
   }
-
-  /* ── Chips: frosted glass ── */
-  .user-chip{background:rgba(255,255,255,.22);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-  .weather-chip{background:rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
-
-  /* ── Active family badge: lime ── */
-  body.family-brosh .badge-brosh{background:var(--accent)!important;color:white}
-  body.family-aloni .badge-aloni{background:var(--accent)!important;color:white}
 
   /* ── Countdown: frosted glass pill ── */
   .countdown-bar {
@@ -492,10 +519,14 @@ body.family-brosh .aloni-only{display:none!important}
     border-bottom:1px solid rgba(255,255,255,0.12);
     border-radius:999px;
     margin:4px 14px 12px;
-    padding:7px 18px;
+    padding:12px 20px;
+    position:relative;
+    z-index:1;
   }
   .cdb-label{color:rgba(255,255,255,.9)}
   .cdb-n{text-shadow:none}
+  .cdb-unit{gap:2px}
+  .cdb-u{font-size:10px!important}
 
   /* ── Content floats up onto hero ── */
   .tab-content{
@@ -505,7 +536,10 @@ body.family-brosh .aloni-only{display:none!important}
     position:relative;
     z-index:2;
     min-height:60vh;
+    padding:20px 16px 88px;
   }
+  /* hide static weather card on mobile – weather moves to hero pill */
+  #weather-container{display:none}
 
   /* ── Bottom tab bar ── */
   .tab-nav {
@@ -617,24 +651,21 @@ body.family-brosh .aloni-only{display:none!important}
 <!-- ═══ STICKY SHELL ═══ -->
 <div class="sticky-shell">
 <header class="app-header">
-  <div class="hero-topbar">
-    <div class="family-badges">
-      <span class="badge badge-brosh">ברוש</span>
-      <span class="badge badge-aloni">אלוני</span>
+  <div class="hero-top-bar">
+    <div class="hero-chips">
+      <button class="hero-chip" id="hero-chip-brosh" onclick="selectFamily('ברוש')">ברוש</button>
+      <button class="hero-chip" id="hero-chip-aloni" onclick="selectFamily('אלוני')">אלוני</button>
     </div>
-    <div class="header-actions">
-      <div class="weather-chip" id="header-weather">
-        <div class="temp" id="header-temp">☀️</div>
-        <div class="wlabel" id="header-wlabel">11.8</div>
-      </div>
-      <button class="user-chip" id="user-chip" onclick="showUserModal()">
-        <span id="user-name-display">?</span> ▾
-      </button>
-    </div>
+    <div class="hero-weather-pill" id="hero-weather-pill">☀️ · זלצבורג</div>
   </div>
+  <!-- JS compat: keep hidden -->
+  <span id="user-name-display" style="display:none"></span>
+  <span id="header-temp" style="display:none"></span>
+  <span id="header-wlabel" style="display:none"></span>
+  <button id="user-chip" style="display:none" onclick="showUserModal()"></button>
   <div class="header-title">
-    <h1>🇦🇹 אוסטריה 2026</h1>
-    <p>11–18 אוגוסט · זלצבורג</p>
+    <h1 class="hero-title">🇦🇹 אוסטריה 2026</h1>
+    <p class="hero-dates">11–18 אוגוסט · זלצבורג</p>
   </div>
 </header>
 <div class="countdown-bar" id="countdown-bar">
@@ -1643,6 +1674,7 @@ async function fetchWeather(){
       </div>`;
     document.getElementById('header-temp').textContent='☀️';
     document.getElementById('header-wlabel').textContent='11.8';
+    const p=document.getElementById('hero-weather-pill');if(p)p.textContent='☀️ ~25° · זלצבורג';
     return;
   }
   try{
@@ -1652,6 +1684,7 @@ async function fetchWeather(){
     if(!d.daily?.time?.length)throw new Error();
     const dd=d.daily;
     document.getElementById('header-temp').textContent=(WMO[dd.weathercode[0]]||'🌡️')+Math.round(dd.temperature_2m_max[0])+'°';
+    const _p=document.getElementById('hero-weather-pill');if(_p)_p.textContent=(WMO[dd.weathercode[0]]||'🌡️')+' '+Math.round(dd.temperature_2m_max[0])+'° · זלצבורג';
     const names=['יום 1','יום 2','יום 3','יום 4','יום 5','יום 6','יום 7','יום 8'];
     const dates=['11.8','12.8','13.8','14.8','15.8','16.8','17.8','18.8'];
     let cards=dd.time.map((t,i)=>`<div class="wd-card${i===0?' today':''}">
