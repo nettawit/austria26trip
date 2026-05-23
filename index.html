@@ -6,7 +6,7 @@
 <meta name="theme-color" content="#0f4526">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>🇦🇹 אוסטריה אוגוסט 2026</title>
-<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800&family=Noto+Serif+Hebrew:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root {
   --primary:#1a6b3c;--primary-light:#2d9e5f;--primary-dark:#0f4526;
@@ -17,7 +17,7 @@
   --radius:16px;--radius-sm:10px;
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{height:100%;font-family:'Heebo',sans-serif;background:var(--bg);color:var(--text);font-size:15px;-webkit-font-smoothing:antialiased}
+html,body{height:100%;font-family:'Noto Serif Hebrew','Heebo',sans-serif;background:var(--bg);color:var(--text);font-size:15px;-webkit-font-smoothing:antialiased}
 body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 
 /* ── LOCK SCREEN ── */
@@ -65,6 +65,8 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .tab-panel{display:none;padding:14px;padding-bottom:max(80px,calc(60px + env(safe-area-inset-bottom,0px)));animation:fadeIn .2s}
 .tab-panel.active{display:block}
 @keyframes fadeIn{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:translateY(0)}}
+@keyframes ripple{from{opacity:.6;transform:scale(.6)}to{opacity:0;transform:scale(2)}}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 
 /* ── CARDS ── */
 .card{background:var(--card);border-radius:var(--radius);box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden}
@@ -116,7 +118,15 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
 .btn-sm{padding:7px 12px;font-size:12px;min-height:36px}
 .btn-block{width:100%;justify-content:center}
-.btn-waze{background:#07c9eb;color:white}
+.btn-waze{background:#07c9eb;color:white;position:relative;overflow:hidden}
+.btn-waze:active::after,.tl-attr-link:active::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.35);border-radius:inherit;animation:ripple .3s ease-out;pointer-events:none}
+.tl-attr-link{position:relative;overflow:hidden}
+.weather-skeleton{height:70px;border-radius:12px;background:linear-gradient(90deg,#eef2ee 25%,#e0e8e0 50%,#eef2ee 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin:4px 0}
+.card-header:active{background:rgba(0,0,0,.03)}
+.attr-card:active{transform:scale(.995);transition:transform .1s}
+@media(max-width:767px){
+  .tl-attr-link{padding:6px 10px;font-size:12px;min-height:36px}
+}
 .btn-maps{background:#4285f4;color:white}
 .btn-booking{background:#003580;color:white}
 .action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
@@ -491,7 +501,7 @@ body.family-brosh .aloni-only{display:none!important}
       <button class="btn btn-sm btn-primary" id="itin-edit-btn" onclick="toggleItinEdit()">✏️ ערוך לו"ז</button>
     </div>
   </div>
-  <div id="weather-container"><div style="text-align:center;padding:20px;color:var(--muted);font-size:13px">⏳ טוען תחזית...</div></div>
+  <div id="weather-container"><div class="weather-skeleton"></div><div class="weather-skeleton" style="height:40px;margin-top:6px;opacity:.6"></div></div>
 
   <!-- Day 1 -->
   <div class="card open" id="d1">
