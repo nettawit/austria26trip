@@ -85,15 +85,15 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .card.open .card-body{display:block}
 
 /* ── DAY CARDS ── */
-.day-header{background:linear-gradient(135deg,var(--primary),var(--primary-light));color:white;padding:12px 16px;display:flex;justify-content:space-between;align-items:center}
-.day-name{font-size:17px;font-weight:800}
-.day-theme{font-size:12px;opacity:.9;margin-top:2px}
-.day-badge{background:rgba(255,255,255,.2);border-radius:8px;padding:4px 10px;font-size:13px;font-weight:700;text-align:center;flex-shrink:0}
+.day-header{background:transparent;padding:12px 16px 10px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--border)}
+.day-name{font-size:17px;font-weight:800;color:var(--text)}
+.day-theme{font-size:12px;color:var(--gray-text);margin-top:2px}
+.day-badge{background:var(--accent);color:white;border-radius:10px;padding:4px 10px;font-size:13px;font-weight:700;text-align:center;flex-shrink:0}
 
 /* ── TIMELINE ── */
-.timeline{padding:12px 0}
-.tl-item{display:flex;gap:10px;margin-bottom:16px}
-.tl-item:last-child{margin-bottom:0}
+.timeline{padding:4px 0}
+.tl-item{display:flex;gap:10px;padding:10px 0;margin-bottom:0;border-bottom:1px solid var(--border)}
+.tl-item:last-child{border-bottom:none;padding-bottom:4px}
 .tl-time{min-width:48px;max-width:48px;font-size:11px;font-weight:700;color:var(--primary);text-align:left;padding-top:3px;line-height:1.3}
 .tl-dot{width:12px;flex-shrink:0;display:flex;flex-direction:column;align-items:center}
 .tl-dot::before{content:'';width:10px;height:10px;border-radius:50%;background:var(--accent);flex-shrink:0;margin-top:4px}
@@ -107,21 +107,21 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .alert{padding:10px 12px;border-radius:10px;font-size:13px;margin-bottom:10px;display:flex;gap:8px;align-items:flex-start;line-height:1.5}
 .alert-warning{background:#fff8e6;border:1px solid #ffd57e;color:#7a5500}
 .alert-danger{background:#fff0f0;border:1px solid #ffb3b3;color:#8b0000}
-.alert-info{background:#e8f4fd;border:1px solid #90cdf4;color:#1a4971}
+.alert-info{background:#e8f4fd;border:1px solid #90cdf4;color:#1a5280}
 .alert-success{background:#f0fff4;border:1px solid #9ae6b4;color:#1a4731}
 .alert-icon{font-size:16px;flex-shrink:0}
 
 /* ── BUTTONS ── */
 .btn{display:inline-flex;align-items:center;gap:6px;padding:10px 14px;border-radius:999px;font-family:'Assistant',sans-serif;font-size:13px;font-weight:700;cursor:pointer;border:none;text-decoration:none;transition:all .15s;min-height:44px;user-select:none;white-space:nowrap}
 .btn:active{opacity:.8;transform:scale(.97)}
-.btn-primary{background:var(--primary);color:white}
+.btn-primary{background:var(--cta);color:white}
 .btn-accent{background:var(--accent);color:white}
-.btn-outline{background:white;color:var(--primary);border:2px solid var(--primary)}
+.btn-outline{background:transparent;color:var(--text);border:1.5px solid #DDDDD8}
 .btn-danger{background:var(--danger);color:white}
-.btn-ghost{background:transparent;color:var(--muted);border:1px solid var(--border)}
+.btn-ghost{background:transparent;color:var(--gray-text);border:none}
 .btn-sm{padding:7px 12px;font-size:12px;min-height:36px}
 .btn-block{width:100%;justify-content:center}
-.btn-waze{background:var(--lime-tint);color:var(--lime-dark);position:relative;overflow:hidden}
+.btn-waze{background:transparent;color:var(--lime-dark);border:1.5px solid var(--accent);position:relative;overflow:hidden}
 .btn-waze:active::after,.tl-attr-link:active::after{content:'';position:absolute;inset:0;background:rgba(255,255,255,.35);border-radius:inherit;animation:ripple .3s ease-out;pointer-events:none}
 .tl-attr-link{position:relative;overflow:hidden}
 .weather-skeleton{height:70px;border-radius:12px;background:linear-gradient(90deg,#eef2ee 25%,#e0e8e0 50%,#eef2ee 75%);background-size:200% 100%;animation:shimmer 1.4s infinite;margin:4px 0}
@@ -130,8 +130,8 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 @media(max-width:767px){
   .tl-attr-link{padding:6px 10px;font-size:12px;min-height:36px}
 }
-.btn-maps{background:#4285f4;color:white}
-.btn-booking{background:#003580;color:white}
+.btn-maps{background:transparent;color:var(--text);border:1.5px solid #DDDDD8}
+.btn-booking{background:var(--cta);color:white;border:none}
 .action-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px;align-items:center}
 
 /* ── INFO TABLE ── */
@@ -153,7 +153,7 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .tag-red{background:#fff0f0;color:var(--danger)}
 .tag-orange{background:#fff8e6;color:var(--warning)}
 .tag-green{background:#f0fff4;color:var(--primary)}
-.tag-blue{background:#e8f4fd;color:#1a4971}
+.tag-blue{background:#e8f4fd;color:#1a5280}
 
 /* ── WEATHER ── */
 .weather-strip{background:white;border-radius:12px;box-shadow:var(--shadow);padding:12px;margin-bottom:14px}
@@ -200,8 +200,8 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 
 /* ── ATTRACTIONS ── */
 .attr-img-wrap{background:linear-gradient(135deg,var(--primary-dark),var(--primary-light));height:150px;overflow:hidden}
-.tl-attr-link{display:inline-flex;align-items:center;gap:3px;font-size:11px;font-weight:700;color:var(--primary);background:var(--accent-light);border:none;border-radius:6px;padding:2px 7px;cursor:pointer;margin-top:4px;text-decoration:none;vertical-align:middle}
-.tl-attr-link:hover{background:var(--accent)}
+.tl-attr-link{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--text);background:transparent;border:1.5px solid #DDDDD8;border-radius:999px;padding:4px 10px;cursor:pointer;margin-top:6px;text-decoration:none;vertical-align:middle;min-height:32px}
+.tl-attr-link:hover{border-color:var(--accent);color:var(--lime-dark)}
 .attr-card{background:white;border-radius:14px;box-shadow:var(--shadow);margin-bottom:12px;overflow:hidden;position:relative}
 .attr-img{width:100%;height:130px;object-fit:cover}
 .attr-body{padding:12px}
@@ -229,15 +229,16 @@ body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
 .pack-item.custom .pack-text::after{content:' •';color:var(--accent)}
 
 /* ── FLIGHT CARD ── */
-.flight-card{background:linear-gradient(135deg,#1a2e6e,#2d4eb8);color:white;border-radius:16px;padding:16px;margin-bottom:12px}
+.flight-card{background:white;border-radius:20px;box-shadow:var(--shadow);border:none;border-top:4px solid var(--accent);overflow:hidden;margin-bottom:12px;padding:14px 16px 16px}
+.fl-direction{font-size:11px;font-weight:600;color:var(--lime-dark);background:var(--lime-tint);border-radius:999px;padding:2px 10px;display:inline-block;margin-bottom:10px}
 .fl-route{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
-.fl-city{font-size:18px;font-weight:800}
-.fl-code{font-size:12px;opacity:.7}
+.fl-city{font-size:18px;font-weight:800;color:var(--text)}
+.fl-code{font-size:12px;color:var(--gray-text);margin-top:2px}
 .fl-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
-.fl-label{font-size:11px;opacity:.7}
-.fl-val{font-size:14px;font-weight:700}
+.fl-label{font-size:11px;color:var(--gray-text)}
+.fl-val{font-size:14px;font-weight:700;color:var(--text)}
 .seat-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
-.seat-tag{background:rgba(255,255,255,.2);border-radius:6px;padding:4px 8px;font-size:12px}
+.seat-tag{background:transparent;border:1.5px solid #E0E0DC;border-radius:999px;padding:4px 10px;font-size:12px;color:#5A5A5A}
 
 /* ── TIP CARD ── */
 .tip-card{background:white;border-radius:12px;box-shadow:var(--shadow);padding:14px;margin-bottom:10px;display:flex;gap:12px}
@@ -408,8 +409,8 @@ body.family-brosh .aloni-only{display:none!important}
 .tab-btn.active{color:var(--primary)}
 .tab-btn svg.feather{width:22px;height:22px;stroke:currentColor;stroke-width:1.5;fill:none;flex-shrink:0;transition:stroke-width .15s}
 .tab-btn.active svg.feather{stroke-width:2.5}
-/* Waze inline link override: always lime-tint, not cyan */
-.tl-attr-link[href*="waze"]{background:var(--lime-tint)!important;color:var(--lime-dark)!important}
+/* Waze inline link: outline lime */
+.tl-attr-link[href*="waze"]{background:transparent!important;color:var(--lime-dark)!important;border-color:var(--accent)!important}
 
 /* Tags pill-shaped */
 .ck-tag,.pack-urgent,.tag,.badge{border-radius:999px}
@@ -418,10 +419,6 @@ body.family-brosh .aloni-only{display:none!important}
 /* Card radius upgrade */
 .card,.attr-card,.weather-strip,.tip-card,.ck-item,.pack-item{border-radius:20px}
 .lock-box{border-radius:28px}
-
-/* CTA button color */
-.btn-primary{background:var(--cta);color:#fff}
-.btn-primary:hover{background:#2a2a2a}
 
 /* Today weather card accent */
 .wd-card.today{background:var(--accent-light);border-color:var(--accent)}
@@ -900,13 +897,13 @@ body.family-brosh .aloni-only{display:none!important}
 <!-- ── טיסות ── -->
 <div class="tab-panel" id="panel-flights">
   <div class="flight-card">
-    <div style="font-size:12px;opacity:.7;margin-bottom:8px">✈️ הלוך · שלישי 11.8.2026</div>
+    <div class="fl-direction">✈️ הלוך · שלישי 11.8.2026</div>
     <div class="fl-route"><div><div class="fl-city">תל אביב</div><div class="fl-code">TLV · T1 · 12:00</div></div><div style="font-size:24px;opacity:.7">→</div><div style="text-align:left"><div class="fl-city">זלצבורג</div><div class="fl-code">SZG · 14:35</div></div></div>
     <div class="fl-grid"><div><div class="fl-label">חברה</div><div class="fl-val">ישראייר</div></div><div><div class="fl-label">טיסה</div><div class="fl-val">6H 243</div></div><div><div class="fl-label">מחלקה</div><div class="fl-val">Y Economy</div></div><div><div class="fl-label">Docket</div><div class="fl-val">4440455</div></div></div>
     <div class="seat-tags"><span class="seat-tag">נטע 2F</span><span class="seat-tag">עומר 2E</span><span class="seat-tag">ליה 2D</span><span class="seat-tag">רומי LAP</span></div>
   </div>
-  <div class="flight-card" style="background:linear-gradient(135deg,#6e1a1a,#b82d2d)">
-    <div style="font-size:12px;opacity:.7;margin-bottom:8px">✈️ חזור · שלישי 18.8.2026</div>
+  <div class="flight-card">
+    <div class="fl-direction">✈️ חזור · שלישי 18.8.2026</div>
     <div class="fl-route"><div><div class="fl-city">זלצבורג</div><div class="fl-code">SZG · 12:10</div></div><div style="font-size:24px;opacity:.7">→</div><div style="text-align:left"><div class="fl-city">תל אביב</div><div class="fl-code">TLV · 16:45</div></div></div>
     <div class="fl-grid"><div><div class="fl-label">חברה</div><div class="fl-val">ישראייר</div></div><div><div class="fl-label">טיסה</div><div class="fl-val">6H 248</div></div><div><div class="fl-label">מחלקה</div><div class="fl-val">Y Economy</div></div><div><div class="fl-label">Docket</div><div class="fl-val">4440455</div></div></div>
     <div class="seat-tags"><span class="seat-tag">נטע 2F</span><span class="seat-tag">עומר 2E</span><span class="seat-tag">ליה 2D</span></div>
