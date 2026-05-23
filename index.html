@@ -21,7 +21,9 @@
 }
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{height:100%;font-family:'Assistant',sans-serif;background:var(--bg);color:var(--text);font-size:15px;-webkit-font-smoothing:antialiased}
-body{display:flex;flex-direction:column;min-height:100vh;overflow-x:hidden}
+body{display:flex;flex-direction:column;height:100%;overflow:hidden}
+.app-shell{display:flex;flex-direction:column;height:100dvh;height:100vh;overflow:hidden}
+.page-scroll-area{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding-bottom:80px}
 
 /* ── LOCK SCREEN ── */
 #lock-screen{position:fixed;inset:0;background:linear-gradient(135deg,var(--primary-dark),var(--primary));display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px}
@@ -544,22 +546,19 @@ body.family-brosh .aloni-only{display:none!important}
   /* hide static weather card on mobile – weather moves to hero pill */
   #weather-container{display:none}
 
-  /* ── Bottom tab bar ── */
+  /* ── Bottom tab bar – flex child of app-shell, NOT position:fixed ── */
   .tab-nav {
-    position:fixed;
-    bottom:0;left:0;right:0;
+    flex-shrink:0;
     height:64px;
     flex-direction:row;
     justify-content:space-around;
     align-items:center;
     border-top:1px solid var(--border);
     border-bottom:none;
-    background:rgba(255,255,255,0.96);
-    backdrop-filter:blur(12px);
-    -webkit-backdrop-filter:blur(12px);
-    z-index:9999;
-    padding:6px 4px;
-    padding-bottom:max(6px,env(safe-area-inset-bottom));
+    background:#ffffff;
+    z-index:100;
+    padding:0 4px;
+    padding-bottom:env(safe-area-inset-bottom,0px);
     overflow-x:visible;
     gap:0;
   }
@@ -594,11 +593,6 @@ body.family-brosh .aloni-only{display:none!important}
   }
   .tab-btn.active svg.feather{stroke-width:2.5;width:20px;height:20px}
   .tab-btn.active .tl{display:block;color:white;font-weight:700;font-size:12px;white-space:nowrap}
-
-  /* ── Content: pad for bottom nav ── */
-  .tab-panel {
-    padding-bottom:max(90px,calc(72px + env(safe-area-inset-bottom,0px)));
-  }
 
   /* ── Tap targets ── */
   .btn,.att-btn,.bc-btn{min-height:44px;min-width:44px}
@@ -652,6 +646,9 @@ body.family-brosh .aloni-only{display:none!important}
 </div>
 
 <!-- ═══ STICKY SHELL ═══ -->
+<div class="app-shell">
+<div class="page-scroll-area">
+
 <div class="sticky-shell">
 <header class="app-header">
   <div class="hero-top-bar">
@@ -683,16 +680,6 @@ body.family-brosh .aloni-only{display:none!important}
     <div class="cdb-unit"><span class="cdb-n" id="cd-secs">--</span><span class="cdb-u">שניות</span></div>
   </div>
 </div>
-<nav class="tab-nav">
-  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><i data-feather="calendar"></i><span class="tl">לו"ז</span></button>
-  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><i data-feather="home"></i><span class="tl">מלונות</span></button>
-  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><i data-feather="map-pin"></i><span class="tl">אטרקציות</span></button>
-  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><i data-feather="book-open"></i><span class="tl">הזמנות</span></button>
-  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><i data-feather="send"></i><span class="tl">טיסות</span></button>
-  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><i data-feather="package"></i><span class="tl">ציוד</span></button>
-  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><i data-feather="coffee"></i><span class="tl">מסעדות</span></button>
-  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><i data-feather="info"></i><span class="tl">טיפים</span></button>
-</nav>
 </div><!-- end sticky-shell -->
 
 <!-- ═══ TAB CONTENT ═══ -->
@@ -1033,6 +1020,21 @@ body.family-brosh .aloni-only{display:none!important}
 </div>
 
 </div><!-- end tab-content -->
+
+</div><!-- end page-scroll-area -->
+
+<nav class="tab-nav">
+  <button class="tab-btn active" onclick="switchTab('itinerary')" id="tab-itinerary"><i data-feather="calendar"></i><span class="tl">לו"ז</span></button>
+  <button class="tab-btn" onclick="switchTab('hotels')" id="tab-hotels"><i data-feather="home"></i><span class="tl">מלונות</span></button>
+  <button class="tab-btn" onclick="switchTab('attractions')" id="tab-attractions"><i data-feather="map-pin"></i><span class="tl">אטרקציות</span></button>
+  <button class="tab-btn" onclick="switchTab('bookings')" id="tab-bookings"><i data-feather="book-open"></i><span class="tl">הזמנות</span></button>
+  <button class="tab-btn" onclick="switchTab('flights')" id="tab-flights"><i data-feather="send"></i><span class="tl">טיסות</span></button>
+  <button class="tab-btn" onclick="switchTab('packing')" id="tab-packing"><i data-feather="package"></i><span class="tl">ציוד</span></button>
+  <button class="tab-btn" onclick="switchTab('restaurants')" id="tab-restaurants"><i data-feather="coffee"></i><span class="tl">מסעדות</span></button>
+  <button class="tab-btn" onclick="switchTab('tips')" id="tab-tips"><i data-feather="info"></i><span class="tl">טיפים</span></button>
+</nav>
+
+</div><!-- end app-shell -->
 
 <!-- ═══ ADD ATTRACTION MODAL ═══ -->
 <div class="modal-overlay" id="add-attr-modal" onclick="closeModalOnBg(event,'add-attr-modal')">
