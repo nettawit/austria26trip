@@ -277,11 +277,24 @@ body{display:flex;flex-direction:column;height:100%;overflow:hidden}
     padding-bottom:0;display:block;
   }
 
-  /* Hero hidden on desktop – sidebar nav replaces it */
-  .sticky-shell{display:none}
+  /* Hero: compact gradient banner at top of main area */
+  .sticky-shell{
+    display:flex;
+    height:auto;min-height:0;max-height:none;overflow:visible;
+    background-image:linear-gradient(135deg,var(--primary-dark) 0%,var(--primary) 60%,var(--primary-light) 100%);
+    background-size:auto;background-position:center;
+    flex-direction:column;justify-content:flex-end;
+    padding:24px 32px 20px;gap:10px;
+    border-radius:0;
+  }
+  .app-header{flex:none;background:transparent;box-shadow:none;padding:0}
+  .hero-top-bar{position:static;z-index:auto}
+  .hero-title{font-size:22px;font-weight:800;color:white}
+  .hero-dates{font-size:13px;color:rgba(255,255,255,.75);font-weight:400}
 
-  /* Countdown hidden on desktop – not needed in sidebar layout */
-  .countdown-section{display:none}
+  /* Countdown: show below banner */
+  .countdown-section{display:flex;padding:14px 32px 0}
+  .countdown-bar{background:#141414;backdrop-filter:none;-webkit-backdrop-filter:none;border:none;border-radius:999px;margin:0;padding:10px 20px;width:fit-content}
 
   /* tab-content: reset mobile floating-card styles */
   .tab-content{
